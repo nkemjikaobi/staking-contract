@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Web3 from 'web3';
 // import StakerContract from '../contracts/contracts/artifacts/Staker.json';
-import StakerContract from "../src/Staker.json";
+import StakerContract from '../src/Staker.json';
 import Entrace from './Entrace';
 import UserDashboard from './UserDashboard';
 
@@ -34,7 +34,6 @@ function Home1() {
 
 			window.ethereum.on('accountsChanged', function (accounts) {
 				setSelectedAccount(accounts[0]);
-				console.log(`Selected account changed to ${selectedAccount}`);
 			});
 		}
 
@@ -46,18 +45,17 @@ function Home1() {
 				'0x6d24401A15AAD3De1b4CfA7da0d664756c4DbFb6'
 			)
 		);
-
 		console.log(stakeContract);
 
 		setLoaded(true);
 	};
 
 	const tokenBalance = async () => {
-		let value;
-		console.log('Hey');
-		console.log(stakeContract);
-		let p = await stakeContract.methods.getTokenBalance();
-		console.log(p);
+		let p = await stakeContract.methods.getTokenBalance().call({
+			from: selectedAccount,
+		});
+		setTokensOwned(p)
+		console.log({ p });
 	};
 
 	const tokenStaked = async () => {
@@ -82,7 +80,7 @@ function Home1() {
 				setBuyLoading(false);
 			})
 			.catch(err => {
-				alert("Unsuccessful");
+				alert('Unsuccessful');
 			});
 	};
 
@@ -157,6 +155,8 @@ function Home1() {
 						setUnstakeLoading={setUnstakeLoading}
 						setStakeLoading={setStakeLoading}
 						stakeLoading={stakeLoading}
+						balance={tokenBalance}
+						selectedAccount={selectedAccount}
 					/>
 				)}
 			</header>

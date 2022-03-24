@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const UserDashboard = ({
 	amountStaked,
@@ -14,6 +14,8 @@ const UserDashboard = ({
 	setUnstakeLoading,
 	setStakeLoading,
 	stakeLoading,
+	balance,
+	selectedAccount,
 }) => {
 	const [buyAmount, setBuyAmount] = useState(0);
 	const [stakeAmount, setStakeAmount] = useState(0);
@@ -21,11 +23,24 @@ const UserDashboard = ({
 	const [trfAdd, setTrfAdd] = useState('');
 	const [trfAmount, setTrfAmount] = useState(0);
 
+	const handleBalance = async () => {
+		await balance();
+	};
+
+	useEffect(() => {
+		if (selectedAccount !== '') {
+			console.log(selectedAccount);
+			handleBalance();
+		}
+		//eslint-disable-next-line
+	}, [selectedAccount]);
+
 	return (
 		<div>
 			<main className='container w-600 mt-32'>
 				<h1 className='mb-4'>Staking contract</h1>
-				<p>Welcome user with address: {address}</p>
+				<p className='mb-4'>Welcome user with address: {address}</p>
+				<p className='mb-4'>Balance: {tokenBalance / (10 ** 18)} RGK</p>
 				<div className=''>
 					<div>
 						<input
