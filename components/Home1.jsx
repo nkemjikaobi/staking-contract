@@ -54,14 +54,14 @@ function Home1() {
 		let p = await stakeContract.methods.getTokenBalance().call({
 			from: selectedAccount,
 		});
-		setTokensOwned(p)
+		setTokensOwned(p);
 		console.log({ p });
 	};
 
 	const tokenStaked = async () => {
 		return await stakeContract.methods
-			.buyToken()
-			.send({ from: selectedAccount });
+			.getAmountStaked()
+			.call({ from: selectedAccount });
 	};
 
 	const buyToken = amount => {
@@ -80,7 +80,7 @@ function Home1() {
 			})
 			.catch(err => {
 				alert('Unsuccessful');
-				setBuyLoading(false)
+				setBuyLoading(false);
 			});
 	};
 
@@ -100,7 +100,7 @@ function Home1() {
 			})
 			.catch(err => {
 				alert('Unsuccessful');
-				setStakeLoading(false)
+				setStakeLoading(false);
 			});
 	};
 
@@ -119,7 +119,7 @@ function Home1() {
 			})
 			.catch(err => {
 				alert('Unsuccessful');
-				setUnstakeLoading(false)
+				setUnstakeLoading(false);
 			});
 	};
 
@@ -159,6 +159,7 @@ function Home1() {
 						stakeLoading={stakeLoading}
 						balance={tokenBalance}
 						selectedAccount={selectedAccount}
+						tokenStaked={tokenStaked}
 					/>
 				)}
 			</header>

@@ -16,15 +16,21 @@ const UserDashboard = ({
 	stakeLoading,
 	balance,
 	selectedAccount,
+	tokenStaked,
 }) => {
 	const [buyAmount, setBuyAmount] = useState(0);
 	const [stakeAmount, setStakeAmount] = useState(0);
 	const [unStakeAmount, setUnStakeAmount] = useState(0);
 	const [trfAdd, setTrfAdd] = useState('');
 	const [trfAmount, setTrfAmount] = useState(0);
+	const [tkAmount, setTkAmount] = useState(0);
 
 	const handleBalance = async () => {
 		await balance();
+	};
+	const handleTokenStaked = async () => {
+		const res = await tokenStaked();
+		setTkAmount(res);
 	};
 
 	useEffect(() => {
@@ -34,13 +40,18 @@ const UserDashboard = ({
 		}
 		//eslint-disable-next-line
 	}, [selectedAccount]);
+	useEffect(() => {
+		handleTokenStaked();
+		//eslint-disable-next-line
+	}, []);
 
 	return (
 		<div>
 			<main className='container w-600 mt-32'>
 				<h1 className='mb-4'>Staking contract</h1>
 				<p className='mb-4'>Welcome user with address: {address}</p>
-				<p className='mb-4'>Balance: {tokenBalance / (10 ** 18)} RGK</p>
+				<p className='mb-4'>Balance: {tokenBalance / 10 ** 18} RGK</p>
+				<p className='mb-4'>Amount Staked: {tkAmount}</p>
 				<div className=''>
 					<div>
 						<input
