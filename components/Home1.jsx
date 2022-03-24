@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Web3 from 'web3';
-import StakerContract from '../contracts/contracts/artifacts/Staker.json';
+// import StakerContract from '../contracts/contracts/artifacts/Staker.json';
+import StakerContract from "../src/Staker.json";
 import Entrace from './Entrace';
 import UserDashboard from './UserDashboard';
 
@@ -81,7 +82,7 @@ function Home1() {
 				setBuyLoading(false);
 			})
 			.catch(err => {
-				alert(err);
+				alert("Unsuccessful");
 			});
 	};
 
@@ -100,7 +101,7 @@ function Home1() {
 				//setTokensStaked(tokenStaked());
 			})
 			.catch(err => {
-				alert(err);
+				alert('Unsuccessful');
 			});
 	};
 
@@ -118,7 +119,7 @@ function Home1() {
 				setTokensStaked(tokenStaked());
 			})
 			.catch(err => {
-				alert(err);
+				alert('Unsuccessful');
 			});
 	};
 
