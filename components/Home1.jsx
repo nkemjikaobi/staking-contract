@@ -65,7 +65,6 @@ function Home1() {
 	};
 
 	const buyToken = amount => {
-		console.log(tokenBalance());
 		setBuyLoading(true);
 		let provider = window.ethereum;
 		stakeContract.methods
@@ -81,6 +80,7 @@ function Home1() {
 			})
 			.catch(err => {
 				alert('Unsuccessful');
+				setBuyLoading(false)
 			});
 	};
 
@@ -100,6 +100,7 @@ function Home1() {
 			})
 			.catch(err => {
 				alert('Unsuccessful');
+				setStakeLoading(false)
 			});
 	};
 
@@ -118,6 +119,7 @@ function Home1() {
 			})
 			.catch(err => {
 				alert('Unsuccessful');
+				setUnstakeLoading(false)
 			});
 	};
 
