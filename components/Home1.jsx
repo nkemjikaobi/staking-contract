@@ -11,7 +11,9 @@ function Home1() {
 
 	const [tokensOwned, setTokensOwned] = useState(0);
 	const [tokensStaked, setTokensStaked] = useState(0);
-	const [loading, setLoading] = useState(false);
+	const [buyLoading, setBuyLoading] = useState(false);
+	const [stakeLoading, setStakeLoading] = useState(false);
+	const [unstakeLoading, setUnstakeLoading] = useState(false);
 
 	const init = async () => {
 		let provider = window.ethereum;
@@ -65,7 +67,7 @@ function Home1() {
 
 	const buyToken = amount => {
 		console.log(tokenBalance());
-		setLoading(true);
+		setBuyLoading(true);
 		let provider = window.ethereum;
 		stakeContract.methods
 			.buyToken()
@@ -76,7 +78,7 @@ function Home1() {
 			.then(tx => {
 				console.log(tx);
 				alert('Successful');
-				setLoading(false);
+				setBuyLoading(false);
 			})
 			.catch(err => {
 				alert(err);
@@ -84,7 +86,7 @@ function Home1() {
 	};
 
 	const stake = numOfTokens => {
-		setLoading(true);
+		setUnstakeLoading(true);
 
 		console.log(stakeContract);
 		stakeContract.methods
@@ -92,7 +94,7 @@ function Home1() {
 			.send({ from: selectedAccount })
 			.then(tx => {
 				console.log(tx);
-				setLoading(false);
+				setUnstakeLoading(false);
 
 				//alert(tx)
 				//setTokensStaked(tokenStaked());
@@ -148,8 +150,12 @@ function Home1() {
 						stake={stake}
 						unStake={unStake}
 						transfer={transFer}
-						loading={loading}
-						setLoading={setLoading}
+						buyLoading={buyLoading}
+						setBuyLoading={setBuyLoading}
+						unstakeLoading={unstakeLoading}
+						setUnstakeLoading={setUnstakeLoading}
+						setStakeLoading={setStakeLoading}
+						stakeLoading={stakeLoading}
 					/>
 				)}
 			</header>

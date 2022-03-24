@@ -8,8 +8,12 @@ const UserDashboard = ({
 	stake,
 	unStake,
 	transfer,
-	loading,
-	setLoading
+	buyLoading,
+	setBuyLoading,
+	unstakeLoading,
+	setUnstakeLoading,
+	setStakeLoading,
+	stakeLoading,
 }) => {
 	const [buyAmount, setBuyAmount] = useState(0);
 	const [stakeAmount, setStakeAmount] = useState(0);
@@ -34,11 +38,11 @@ const UserDashboard = ({
 						<button
 							onClick={() => {
 								buy(buyAmount);
-								setLoading(true);
+								setBuyLoading(true);
 							}}
 							className='bg-white  flex items-center justify-center p-5 w-2/3 border border-black rounded-md text-black my-5 hover:bg-black hover:text-white '
 						>
-							{loading ? 'In Progress...' : 'Buy Token'}
+							{buyLoading ? 'In Progress...' : 'Buy Token'}
 						</button>
 					</div>
 					<hr />
@@ -53,11 +57,11 @@ const UserDashboard = ({
 						<button
 							onClick={() => {
 								stake(stakeAmount);
-								setLoading(true);
+								setStakeLoading(true);
 							}}
 							className='bg-white flex items-center justify-center p-5 w-2/3 border border-black rounded-md text-black my-5 hover:bg-black hover:text-white '
 						>
-							{loading ? 'In Progress...' : 'Stake Token'}
+							{stakeLoading ? 'In Progress...' : 'Stake Token'}
 						</button>
 					</div>
 					<hr />
@@ -72,11 +76,11 @@ const UserDashboard = ({
 						<button
 							onClick={() => {
 								unStake(unStakeAmount);
-								setLoading(true);
+								setUnstakeLoading(true);
 							}}
 							className='bg-white flex items-center justify-center p-5 w-2/3 border border-black rounded-md text-black my-5 hover:bg-black hover:text-white '
 						>
-							{loading ? 'In Progress...' : 'Unstake Token'}
+							{unstakeLoading ? 'In Progress...' : 'Unstake Token'}
 						</button>
 					</div>
 				</div>
